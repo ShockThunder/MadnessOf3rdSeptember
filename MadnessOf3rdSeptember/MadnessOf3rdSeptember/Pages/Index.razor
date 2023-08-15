@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using System.Timers
 
 <PageTitle>Счетчик 3 сентября</PageTitle>
 <div class="container">
@@ -6,12 +7,13 @@
         <div class="col border border-primary">
             Статистика на фоне шуфутинского
         </div>
-        <div class="col border border-primary">
+        <div class="col border border-primary d-flex justify-content-center flex-column">
+            
             <h1>Счетчик 3 сентября</h1>
             
             <p role="status">Текущее 3 сентября номер: @currentCount</p>
+            <img src="images/calendar.png" alt="" @onclick="IncrementCount"/>
             
-            <button class="btn btn-primary" @onclick="IncrementCount">Сорвать</button>
         </div>
         <div class="col border border-primary">
             Апгрейды
@@ -27,5 +29,23 @@
     {
         currentCount++;
     }
+    
+    protected override void OnInitialized()
+    {
+        StartGame();
+        base.OnInitialized();
+    }
 
+    private void StartGame()
+    {
+        var timer = new Timer(1000);
+        timer.Elapsed += Update;
+        timer.Enabled = true;
+    }
+    
+    private void Update(Object source, ElapsedEventArgs e)
+    {
+        currentCount++;
+        StateHasChanged();
+    }
 }
