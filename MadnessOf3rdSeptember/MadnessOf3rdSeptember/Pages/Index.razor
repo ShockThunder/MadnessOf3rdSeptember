@@ -1,9 +1,31 @@
 ﻿@page "/"
 
-<PageTitle>Index</PageTitle>
+<PageTitle>Счетчик 3 сентября</PageTitle>
+<div class="container">
+    <div class="row">
+        <div class="col border border-primary">
+            Статистика на фоне шуфутинского
+        </div>
+        <div class="col border border-primary">
+            <h1>Счетчик 3 сентября</h1>
+            
+            <p role="status">Текущее 3 сентября номер: @currentCount</p>
+            
+            <button class="btn btn-primary" @onclick="IncrementCount">Сорвать</button>
+        </div>
+        <div class="col border border-primary">
+            Апгрейды
+        </div>
+    </div>
+</div>
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+@code {
+    private int currentCount = 0;
 
-<SurveyPrompt Title="How is Blazor working for you?"/>
+    private void IncrementCount()
+    {
+        currentCount++;
+    }
+
+}
