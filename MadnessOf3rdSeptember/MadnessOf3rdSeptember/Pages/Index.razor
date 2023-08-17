@@ -16,7 +16,11 @@
             
         </div>
         <div class="col border border-primary">
-            Апгрейды
+            <h1>Апгрейды</h1>
+            <h2>Можно купить:</h2>
+            <button @onclick="BuyUpgrade">Гитара</button>
+            
+            <h2>Куплено:</h2>
         </div>
     </div>
 </div>
@@ -42,7 +46,7 @@
         var timer = new Timer(1000);
         timer.Elapsed += Update;
         timer.Enabled = true;
-        BuyUpgrade(100);
+        BuyUpgrade();
     }
     
     private void Update(Object source, ElapsedEventArgs e)
@@ -51,12 +55,9 @@
         StateHasChanged();
     }
     
-    private void BuyUpgrade(int upgPrice)
+    private void BuyUpgrade()
     {
-        if (upgPrice >= 100)
-        {
-            FirstUpgrade();
-        }
+        FirstUpgrade();
     }
 
     private void FirstUpgrade()
