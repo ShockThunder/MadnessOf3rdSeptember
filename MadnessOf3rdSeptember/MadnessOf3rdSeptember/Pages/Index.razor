@@ -32,6 +32,7 @@
     
     protected override void OnInitialized()
     {
+        List<int> upgrades = new List<int>();
         StartGame();
         base.OnInitialized();
     }
@@ -41,11 +42,25 @@
         var timer = new Timer(1000);
         timer.Elapsed += Update;
         timer.Enabled = true;
+        BuyUpgrade(100);
     }
     
     private void Update(Object source, ElapsedEventArgs e)
     {
         currentCount++;
         StateHasChanged();
+    }
+    
+    private void BuyUpgrade(int upgPrice)
+    {
+        if (upgPrice >= 100)
+        {
+            FirstUpgrade();
+        }
+    }
+
+    private void FirstUpgrade()
+    {
+        currentCount += 5000;
     }
 }
