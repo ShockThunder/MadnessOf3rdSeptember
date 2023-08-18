@@ -25,4 +25,9 @@ public class Guitar : IUpgrade
 
         return CurrentCostToUpgrade;
     }
+
+    public int CostAfterUpgradeLevel()
+    {
+        return CostToUpgradeLevel();
+    }
 }

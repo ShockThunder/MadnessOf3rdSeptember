@@ -7,6 +7,6 @@ public interface IUpgrade
     public int MaxLevel { get; }
     public int StartCost { get; }
     public int CurrentCostToUpgrade { get; set; }
+    public int CurrentCost { get; set; }
     public int DealByLevel { get; set; }
-    public int CostToUpgradeLevel();
 }
