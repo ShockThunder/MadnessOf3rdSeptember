@@ -7,7 +7,7 @@
   "linkerEnabled": true,
   "resources": {
     "assembly": {
-      "MadnessOf3rdSeptember.dll": "sha256-+noKsFKy3Ximo\/poRhnYkyIQjBGVYr\/FQe9DAz8+vso=",
+      "MadnessOf3rdSeptember.dll": "sha256-X9jpTffNFsbjTT5eBsBkVucWqCtXC3Yiu\/XNm3Q2Iqc=",
       "Microsoft.AspNetCore.Components.dll": "sha256-DPG33NMxVtUCSehwSy\/eUsZqg+2HuUTBa\/XkjXoV+rk=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-+u3cIDrxSVu\/U4ExmYoMm6n8+iOHehMjOpamZ0y54Jc=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-vNH6Bh312GGbZu1vNJJXfEZR9WZkmTZ5q68aPGwDVsM=",
@@ -23,7 +23,7 @@
       "Microsoft.JSInterop.dll": "sha256-Lky+t9YrRX4LnHiLsajDp2sVuVvc1PofjdoQLOTKDeo=",
       "Microsoft.JSInterop.WebAssembly.dll": "sha256-WTucmk2yLSwMdJTTP7pXYw0e6icK4ac8eihJmosZs8k=",
       "System.Collections.Concurrent.dll": "sha256-PxQU\/bvw3Wm25tTw1WDkUzo6f+vDjh8NqIInxaizvno=",
-      "System.Collections.dll": "sha256-1N++sbnqT+yiOdZbzCKvkKe7SqaK\/i3csldgRomBgxs=",
+      "System.Collections.dll": "sha256-9WhGmIPtNbOrVs79oz1xONY35XJqWb9Nq\/HSy44b+gw=",
       "System.ComponentModel.dll": "sha256-CK27ahubgvE8mKln8XEP1tjTrM9b4weQ0ubvJCAFcog=",
       "System.ComponentModel.Primitives.dll": "sha256-idlkCZqOhidVYttDwsX3WdNptmZx8pFRSUdLt\/hHLJg=",
       "System.ComponentModel.TypeConverter.dll": "sha256-n171kkm72NFBpVY3E9BpER\/oVzDeXwYa9uuEpQmRTbY=",
@@ -36,7 +36,7 @@
       "System.Private.Runtime.InteropServices.JavaScript.dll": "sha256-1rUOXmGVZkEU+u68GWJ\/MYsicglvO3XUIa9P2PBdT\/k=",
       "System.Private.Uri.dll": "sha256-LZvcnOlads7KjPOQGd4M\/BnLjEAwxJ1ermel2ZUiYFs=",
       "System.Runtime.CompilerServices.Unsafe.dll": "sha256-xcBI0NGVGMHc1iW0gmfp5EKQjBFRBgrKZX87avYxWLk=",
-      "System.Runtime.dll": "sha256-nDtu9F5vBbZraMY+f9U16JlLQDPtCSHj+aTMOjzuSlg=",
+      "System.Runtime.dll": "sha256-MQTwPxE5QZoq4FBgKWfKFaj4cn64FCo1TEvgTs1aP0k=",
       "System.Text.Encodings.Web.dll": "sha256-2z5KXQcR\/SnjihWkOqWZiIIWLNtfcEjvhUJOZmAG6Rw=",
       "System.Text.Json.dll": "sha256-PRlBnrvq4NbLjriHIsVMV5B2dAM8tRUDBUUcJFEog5w="
     },
