@@ -1,5 +1,6 @@
 ﻿@page "/"
 @using System.Timers
+@using MadnessOf3rdSeptember.Upgrade
 
 <PageTitle>Счетчик 3 сентября</PageTitle>
 <div class="container">
@@ -16,7 +17,11 @@
             
         </div>
         <div class="col border border-primary">
-            Апгрейды
+            <h1>Апгрейды</h1>
+            <h2>Можно купить:</h2>
+            <button @onclick="BuyGuitar">Гитара</button>
+            
+            <h2>Куплено:</h2>
         </div>
     </div>
 </div>
@@ -32,20 +37,37 @@
     
     protected override void OnInitialized()
     {
-        StartGame();
+        List<IUpgrade> upgrades = new List<IUpgrade>();
+        upgrades.Add(new Guitar());
+        var timer = new Timer(1000);
+        StartGame(timer, upgrades);
         base.OnInitialized();
     }
 
-    private void StartGame()
+    private void StartGame(Timer timer, List<IUpgrade> upgrades)
     {
-        var timer = new Timer(1000);
         timer.Elapsed += Update;
+        foreach (var upgrade in upgrades)
+        {
+            currentCount += upgrade.CurrentCost;
+        }
         timer.Enabled = true;
     }
     
     private void Update(Object source, ElapsedEventArgs e)
     {
-        currentCount++;
+        // var currentUpgradeValue 
         StateHasChanged();
+    }
+    
+    private void BuyGuitar()
+    {
+        var guitar = new Guitar();
+        guitar.CostAfterUpgradeLevel();
+    }
+
+    private void FirstUpgrade()
+    {
+        currentCount += 5000;
     }
 }
