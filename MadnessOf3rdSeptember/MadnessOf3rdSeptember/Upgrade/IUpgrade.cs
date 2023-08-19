@@ -3,10 +3,12 @@
 public interface IUpgrade
 {
     public string Name { get; }
+    public string Image { get; set; }
     public int CurrLevel { get; set; }
     public int MaxLevel { get; }
     public int StartCost { get; }
-    public int CurrentCostToUpgrade { get; set; }
     public int CurrentCost { get; set; }
-    public int DealByLevel { get; set; }
+    public int CountByLevel { get; set; }
+    public int Buy(int currentCount);
 }
+

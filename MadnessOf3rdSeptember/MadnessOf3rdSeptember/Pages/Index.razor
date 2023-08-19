@@ -29,6 +29,7 @@
 
 @code {
     private int currentCount = 0;
+    List<IUpgrade> upgrades = new();
 
     private void IncrementCount()
     {
@@ -37,37 +38,32 @@
     
     protected override void OnInitialized()
     {
-        List<IUpgrade> upgrades = new List<IUpgrade>();
         upgrades.Add(new Guitar());
-        var timer = new Timer(1000);
-        StartGame(timer, upgrades);
+        StartGame();
         base.OnInitialized();
     }
 
-    private void StartGame(Timer timer, List<IUpgrade> upgrades)
+    private void StartGame()
     {
+        var timer = new Timer(1000);
         timer.Elapsed += Update;
-        foreach (var upgrade in upgrades)
-        {
-            currentCount += upgrade.CurrentCost;
-        }
+        
         timer.Enabled = true;
     }
     
     private void Update(Object source, ElapsedEventArgs e)
     {
-        // var currentUpgradeValue 
+        foreach (var upgrade in upgrades)
+        {
+            currentCount += upgrade.CountByLevel * upgrade.CurrLevel;
+        }
+        
         StateHasChanged();
     }
     
     private void BuyGuitar()
     {
-        var guitar = new Guitar();
-        guitar.CostAfterUpgradeLevel();
-    }
-
-    private void FirstUpgrade()
-    {
-        currentCount += 5000;
+        var guitar = upgrades.First(x => x is Guitar) as Guitar;
+        currentCount = guitar!.Buy(currentCount);
     }
 }
