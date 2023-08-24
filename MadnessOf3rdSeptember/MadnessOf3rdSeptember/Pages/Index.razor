@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using System.Timers
 @using MadnessOf3rdSeptember.Upgrade
+@inject GameState _gameState;
 
 <PageTitle>Счетчик 3 сентября</PageTitle>
 <div class="container">
@@ -19,7 +20,7 @@
         <div class="col border border-primary">
             <h1>Апгрейды</h1>
             <h2>Можно купить:</h2>
-            <button @onclick="BuyGuitar">Гитара @_gameState.Upgrades.First(x => x is Guitar).CurrentCost</button>
+            <button @onclick="BuyGuitar">Гитара @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
             
             <h2>Куплено:</h2>
         </div>
@@ -28,40 +29,39 @@
 
 
 @code {
-    private GameState _gameState = new();
-
     private void IncrementScore()
     {
         _gameState.IncrementScore(1);
     }
-    
-    protected override void OnInitialized()
+
+    protected override async Task OnInitializedAsync()
     {
-        StartGame();
-        base.OnInitialized();
+        await StartGame();
     }
 
-    private void StartGame()
+    private async Task StartGame()
     {
+        await _gameState.LoadGameState();
         var timer = new Timer(1000);
-        timer.Elapsed += Update;
+        timer.Elapsed += async (source, e) => await Update(source, e);
         
         timer.Enabled = true;
     }
     
-    private void Update(Object source, ElapsedEventArgs e)
+    private async Task Update(Object source, ElapsedEventArgs e)
     {
         foreach (var upgrade in _gameState.Upgrades)
         {
-            _gameState.IncrementScore(upgrade.CountByLevel * upgrade.CurrLevel);
+            _gameState.IncrementScore(upgrade.CountByLevel * upgrade.CurrentLevel);
         }
-        
+
+        await _gameState.SaveGameState();
         StateHasChanged();
     }
     
     private void BuyGuitar()
     {
-        var guitar =  _gameState.Upgrades.First(x => x is Guitar) as Guitar;
+        var guitar =  _gameState.Upgrades.First(x => x.Name == "Guitar");
         _gameState.CurrentScore = guitar!.Buy(_gameState.CurrentScore);
     }
 }
