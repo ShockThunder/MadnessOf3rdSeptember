@@ -12,8 +12,8 @@
             
             <h1>Счетчик 3 сентября</h1>
             
-            <p role="status">Текущее 3 сентября номер: @currentCount</p>
-            <img src="images/calendar.png" alt="" @onclick="IncrementCount"/>
+            <p role="status">Текущее 3 сентября номер: @_gameState.CurrentScore</p>
+            <img src="images/calendar.png" alt="" @onclick="IncrementScore"/>
             
         </div>
         <div class="col border border-primary">
@@ -28,17 +28,15 @@
 
 
 @code {
-    private int currentCount = 0;
-    List<IUpgrade> upgrades = new();
+    private GameState _gameState = new();
 
-    private void IncrementCount()
+    private void IncrementScore()
     {
-        currentCount++;
+        _gameState.IncrementScore(1);
     }
     
     protected override void OnInitialized()
     {
-        upgrades.Add(new Guitar());
         StartGame();
         base.OnInitialized();
     }
@@ -53,9 +51,9 @@
     
     private void Update(Object source, ElapsedEventArgs e)
     {
-        foreach (var upgrade in upgrades)
+        foreach (var upgrade in _gameState.Upgrades)
         {
-            currentCount += upgrade.CountByLevel * upgrade.CurrLevel;
+            _gameState.IncrementScore(upgrade.CountByLevel * upgrade.CurrLevel);
         }
         
         StateHasChanged();
@@ -63,7 +61,7 @@
     
     private void BuyGuitar()
     {
-        var guitar = upgrades.First(x => x is Guitar) as Guitar;
-        currentCount = guitar!.Buy(currentCount);
+        var guitar =  _gameState.Upgrades.First(x => x is Guitar) as Guitar;
+        _gameState.CurrentScore = guitar!.Buy(_gameState.CurrentScore);
     }
 }

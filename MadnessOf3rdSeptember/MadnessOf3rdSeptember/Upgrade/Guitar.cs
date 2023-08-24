@@ -20,7 +20,7 @@ public class Guitar : IUpgrade
         CountByLevel = 2;
     }
 
-    public int Buy(int currentCount)
+    public long Buy(long currentCount)
     {
         if(currentCount < CurrentCost)
             return currentCount;
