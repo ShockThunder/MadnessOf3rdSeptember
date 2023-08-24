@@ -19,7 +19,7 @@
         <div class="col border border-primary">
             <h1>Апгрейды</h1>
             <h2>Можно купить:</h2>
-            <button @onclick="BuyGuitar">Гитара</button>
+            <button @onclick="BuyGuitar">Гитара @_gameState.Upgrades.First(x => x is Guitar).CurrentCost</button>
             
             <h2>Куплено:</h2>
         </div>
