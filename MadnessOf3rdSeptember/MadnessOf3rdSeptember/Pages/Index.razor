@@ -3,20 +3,27 @@
 @using MadnessOf3rdSeptember.Upgrade
 
 <PageTitle>Счетчик 3 сентября</PageTitle>
-<div class="container">
-    <div class="row">
-        <div class="col border border-primary">
+<div class="container h-75">
+    <div class="row h-100">
+        <div class="col border border-4 border-dark statistics-wrap">
+            <img
+                class="statistics-bg"
+                src="images/shufutinskiy.png"/>
             Статистика на фоне шуфутинского
         </div>
-        <div class="col border border-primary d-flex justify-content-center flex-column">
+        <div class="col border border-4 border-dark d-flex justify-content-center flex-column">
             
             <h1>Счетчик 3 сентября</h1>
             
             <p role="status">Текущее 3 сентября номер: @currentCount</p>
-            <img src="images/calendar.png" alt="" @onclick="IncrementCount"/>
+            
+            
+
+                <img src="images/calendar.png" alt="" @onclick="IncrementCount"/>
+
             
         </div>
-        <div class="col border border-primary">
+        <div class="col border border-4 border-dark">
             <h1>Апгрейды</h1>
             <h2>Можно купить:</h2>
             <button @onclick="BuyGuitar">Гитара</button>
@@ -42,6 +49,7 @@
         StartGame();
         base.OnInitialized();
     }
+
 
     private void StartGame()
     {
