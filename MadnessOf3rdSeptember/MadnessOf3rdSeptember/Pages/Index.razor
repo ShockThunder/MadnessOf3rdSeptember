@@ -1,6 +1,7 @@
 ﻿@page "/"
 @using System.Timers
 @using MadnessOf3rdSeptember.Upgrade
+@inject GameState _gameState;
 
 <PageTitle>Счетчик 3 сентября</PageTitle>
 <div class="container">
@@ -12,14 +13,14 @@
             
             <h1>Счетчик 3 сентября</h1>
             
-            <p role="status">Текущее 3 сентября номер: @currentCount</p>
-            <img src="images/calendar.png" alt="" @onclick="IncrementCount"/>
+            <p role="status">Текущее 3 сентября номер: @_gameState.CurrentScore</p>
+            <img src="images/calendar.png" alt="" @onclick="IncrementScore"/>
             
         </div>
         <div class="col border border-primary">
             <h1>Апгрейды</h1>
             <h2>Можно купить:</h2>
-            <button @onclick="BuyGuitar">Гитара</button>
+            <button @onclick="BuyGuitar">Гитара @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
             
             <h2>Куплено:</h2>
         </div>
@@ -28,42 +29,39 @@
 
 
 @code {
-    private int currentCount = 0;
-    List<IUpgrade> upgrades = new();
-
-    private void IncrementCount()
+    private void IncrementScore()
     {
-        currentCount++;
-    }
-    
-    protected override void OnInitialized()
-    {
-        upgrades.Add(new Guitar());
-        StartGame();
-        base.OnInitialized();
+        _gameState.IncrementScore(1);
     }
 
-    private void StartGame()
+    protected override async Task OnInitializedAsync()
     {
+        await StartGame();
+    }
+
+    private async Task StartGame()
+    {
+        await _gameState.LoadGameState();
         var timer = new Timer(1000);
-        timer.Elapsed += Update;
+        timer.Elapsed += async (source, e) => await Update(source, e);
         
         timer.Enabled = true;
     }
     
-    private void Update(Object source, ElapsedEventArgs e)
+    private async Task Update(Object source, ElapsedEventArgs e)
     {
-        foreach (var upgrade in upgrades)
+        foreach (var upgrade in _gameState.Upgrades)
         {
-            currentCount += upgrade.CountByLevel * upgrade.CurrLevel;
+            _gameState.IncrementScore(upgrade.CountByLevel * upgrade.CurrentLevel);
         }
-        
+
+        await _gameState.SaveGameState();
         StateHasChanged();
     }
     
     private void BuyGuitar()
     {
-        var guitar = upgrades.First(x => x is Guitar) as Guitar;
-        currentCount = guitar!.Buy(currentCount);
+        var guitar =  _gameState.Upgrades.First(x => x.Name == "Guitar");
+        _gameState.CurrentScore = guitar!.Buy(_gameState.CurrentScore);
     }
 }
