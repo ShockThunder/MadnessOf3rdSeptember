@@ -63,6 +63,12 @@ public class GameState
         await _storageService.SetItemAsync("Upgrades", list);
     }
 
+    public void ClearAll()
+    {
+        _storageService.ClearAsync();
+        LoadGameState();
+    }
+
     private class SavedUpgrade
     {
         public string Name { get; set; }
