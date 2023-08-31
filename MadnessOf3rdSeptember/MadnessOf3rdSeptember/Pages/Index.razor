@@ -23,6 +23,8 @@
             <button @onclick="BuyGuitar">Гитара @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
             
             <h2>Куплено:</h2>
+            
+            @ShowReachedUpgrades()[0].Name
         </div>
     </div>
 </div>
@@ -62,6 +64,18 @@
     private void BuyGuitar()
     {
         var guitar =  _gameState.Upgrades.First(x => x.Name == "Guitar");
-        _gameState.CurrentScore = guitar!.Buy(_gameState.CurrentScore);
+        _gameState.CurrentScore += guitar!.Buy(_gameState.CurrentScore);
+    }
+
+    private IList<IUpgrade> ShowReachedUpgrades()
+    {
+        IList<IUpgrade> reachedUpgrades = new List<IUpgrade>();
+        foreach (var upgrade in _gameState.Upgrades)
+        {
+            if (upgrade.CurrentLevel > 1)
+                reachedUpgrades.Add(upgrade);
+        }
+
+        return reachedUpgrades;
     }
 }
