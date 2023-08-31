@@ -8,7 +8,7 @@
   "resources": {
     "assembly": {
       "Blazored.LocalStorage.dll": "sha256-w2vMoqbIgF9UyzKqfDFXjqgg7IsGRHDvzb6DcyaPW6s=",
-      "MadnessOf3rdSeptember.dll": "sha256-z60J9lfFyAX1VXzD2nFXTEE\/JEvaynvDJ1vs4dGdXnc=",
+      "MadnessOf3rdSeptember.dll": "sha256-9t4HfplK89qBDAX1zo5Fe4ue6uNjpSE2NUV60pvtopg=",
       "Microsoft.AspNetCore.Components.dll": "sha256-DPG33NMxVtUCSehwSy\/eUsZqg+2HuUTBa\/XkjXoV+rk=",
       "Microsoft.AspNetCore.Components.Web.dll": "sha256-+u3cIDrxSVu\/U4ExmYoMm6n8+iOHehMjOpamZ0y54Jc=",
       "Microsoft.AspNetCore.Components.WebAssembly.dll": "sha256-vNH6Bh312GGbZu1vNJJXfEZR9WZkmTZ5q68aPGwDVsM=",
