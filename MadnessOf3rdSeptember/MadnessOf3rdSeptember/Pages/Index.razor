@@ -14,6 +14,7 @@
             <h1>Счетчик 3 сентября</h1>
             
             <p role="status">Текущее 3 сентября номер: @_gameState.CurrentScore</p>
+            <button @onclick="_gameState.ClearAll">Сбросить прогресс</button>
             <img src="images/calendar.png" alt="" @onclick="IncrementScore"/>
             
         </div>
@@ -24,7 +25,10 @@
             
             <h2>Куплено:</h2>
             
-            @ShowReachedUpgrades()[0].Name
+            @foreach (var item in ShowReachedUpgrades())
+            {
+                @item.Name
+            }
         </div>
     </div>
 </div>
@@ -64,7 +68,7 @@
     private void BuyGuitar()
     {
         var guitar =  _gameState.Upgrades.First(x => x.Name == "Guitar");
-        _gameState.CurrentScore += guitar!.Buy(_gameState.CurrentScore);
+        _gameState.CurrentScore = guitar!.Buy(_gameState.CurrentScore);
     }
 
     private IList<IUpgrade> ShowReachedUpgrades()
@@ -72,7 +76,7 @@
         IList<IUpgrade> reachedUpgrades = new List<IUpgrade>();
         foreach (var upgrade in _gameState.Upgrades)
         {
-            if (upgrade.CurrentLevel > 1)
+            if (upgrade.CurrentLevel > 0)
                 reachedUpgrades.Add(upgrade);
         }
 
