@@ -21,18 +21,21 @@
 
         </div>
         <div class="col-4 border border-4 border-dark d-flex justify-content-center flex-column">
-            
+
             <div class="fs-1 fw-bold outlined-text text-center">3 сентября номер</div>
             <div class="fs-1 fw-bold outlined-text text-center">@_gameState.CurrentScore</div>
             <button @onclick="_gameState.ClearAll">Сбросить прогресс</button>
-            <img src="images/newCalendar.png" alt="" @onclick="IncrementScore"/>
+            
+            <div class="calendar-wrap">
+                <img src="images/newCalendar.png" alt="" @onclick="IncrementScore" class="calendar-image"/>
+            </div>
 
-        </div>     
+        </div>
         <div class="col-4 border border-4 border-dark upgrades-wrap">
             <div class="upgrades-bg">
                 <img src="images/shufutinskiy.png"/>
             </div>
-            
+
             <div class="upgrades-content">
                 <div class="fs-1 fw-bold outlined-text">Апгрейды</div>
                 <div class="fs-2 fw-bold outlined-text">Можно купить:</div>
@@ -40,7 +43,7 @@
                     <button @onclick="BuyGuitar">Гитара. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
                 </Tooltip>
                 <br/>
-            <button @onclick="BuyFanFestival">Фестиваль фанатов. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "FanFestival").CurrentCost</button>
+                <button @onclick="BuyFanFestival">Фестиваль фанатов. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "FanFestival").CurrentCost</button>
 
                 <div class="fs-3 fw-bold outlined-text">Куплено:</div>
 

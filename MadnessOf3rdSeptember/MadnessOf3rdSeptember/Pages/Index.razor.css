@@ -46,3 +46,18 @@
     -webkit-text-stroke-width: 1.3px;
     -webkit-text-stroke-color: #000000;
 }
+
+.calendar-wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-image {
+    width: 100%;
+}
+
+.calendar-image:active {
+    width: 90%;
+}

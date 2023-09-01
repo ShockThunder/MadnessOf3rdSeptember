@@ -52,9 +52,12 @@ public class GameState
             return;
         foreach (var upgrade in Upgrades)
         {
-            var savedUpgrade = upgrades.First(x => x.Name == upgrade.Name);
-            upgrade.CurrentCost = savedUpgrade.CurrentCost;
-            upgrade.CurrentLevel = savedUpgrade.CurrentLevel;
+            var savedUpgrade = upgrades.FirstOrDefault(x => x.Name == upgrade.Name);
+            if (savedUpgrade != null)
+            {
+                upgrade.CurrentCost = savedUpgrade.CurrentCost;
+                upgrade.CurrentLevel = savedUpgrade.CurrentLevel;
+            }
         }
     }
 
