@@ -3,7 +3,6 @@
 public interface IUpgrade
 {
     public string Name { get; }
-    public string Image { get; set; }
     public int CurrentLevel { get; set; }
     public int MaxLevel { get; }
     public int StartCost { get; }

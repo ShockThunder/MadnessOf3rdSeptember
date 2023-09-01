@@ -42,7 +42,7 @@
     position: absolute;
     z-index: 1;
     width: 95%;
-
+    max-height: 100%;
 }
 
 .outlined-text {
@@ -64,4 +64,26 @@
 
 .calendar-image:active {
     width: 90%;
+}
+
+.upgrade-element {
+    display: flex;
+}
+
+.upgrade-icon {
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    margin: 5px;
+}
+
+.upgrades-list {
+    max-height: 400px;
+    overflow-y: scroll;
+}
+
+.upgrade-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }

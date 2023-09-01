@@ -24,7 +24,16 @@ public class GameState
         return new()
         {
             new Guitar(),
-            new FanFestival()
+            new FanFestival(),
+            new ConcertHall(),
+            new Graffity(),
+            new RecordStudio(),
+            new Restaurant(),
+            new ShufuTower(),
+            new Space(),
+            new Store(),
+            new TimeTravel(),
+            new VillageHouse()
         };
     }
 

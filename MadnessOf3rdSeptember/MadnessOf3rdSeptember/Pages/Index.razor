@@ -48,6 +48,20 @@
             <div class="upgrades-content">
                 <div class="fs-1 fw-bold outlined-text">Апгрейды</div>
                 <div class="fs-2 fw-bold outlined-text">Можно купить:</div>
+                <div class="upgrades-list">
+                    @foreach (var upgrade in _gameState.Upgrades)
+                                    {
+                                        <div class="upgrade-element">
+                                            <div class="upgrade-icon">
+                                                <img src="icons/@(upgrade.Name).svg"/>
+                                            </div>
+                                            <div class="upgrade-info">
+                                                <div>Цена: @upgrade.CurrentCost</div>
+                                                <div>Куплено: @upgrade.CurrentLevel</div>
+                                            </div>
+                                        </div>
+                                    }
+                </div>
                 <Tooltip Class="d-inline-block" Title="Какое-то описание" role="button">
                     <button @onclick="BuyGuitar">Гитара. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
                 </Tooltip>
