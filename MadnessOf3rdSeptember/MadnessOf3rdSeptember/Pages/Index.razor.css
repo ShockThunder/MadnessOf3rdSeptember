@@ -1,13 +1,48 @@
 ﻿.statistics-bg {
-    opacity: 0.6;
-    position: absolute;
+    opacity: 0.5;
     left: 0;
     top: 0;
     width: 100%;
     height: auto;
+    position: absolute;
+    z-index: 0;
 }
 
 .statistics-wrap {
     overflow: hidden;
     position: relative;
+}
+
+.statistics-content {
+    position: absolute;
+    z-index: 1;
+    width: 95%;
+}
+
+.upgrades-bg {
+    opacity: 0.5;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    z-index: 0;
+}
+
+.upgrades-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.upgrades-content {
+    position: absolute;
+    z-index: 1;
+    width: 95%;
+
+}
+
+.outlined-text {
+    color: #f9d76f;
+    -webkit-text-stroke-width: 1.3px;
+    -webkit-text-stroke-color: #000000;
 }

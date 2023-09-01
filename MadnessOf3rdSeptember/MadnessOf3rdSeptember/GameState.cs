@@ -17,10 +17,15 @@ public class GameState
     public long TotalScore { get; set; } = 0;
     public long CurrentScore { get; set; } = 0;
 
-    public List<IUpgrade> Upgrades { get; set; } = new()
+    public List<IUpgrade> Upgrades { get; set; } = InitiateUpgrades();
+
+    private static List<IUpgrade> InitiateUpgrades()
     {
-        new Guitar()
-    };
+        return new()
+        {
+            new Guitar()
+        };
+    }
 
     public void IncrementScore(long value)
     {
@@ -28,6 +33,14 @@ public class GameState
         TotalScore += value;
     }
 
+    public void InitiateGameState()
+    {
+        TotalScore = 0;
+        CurrentScore = 0;
+        Upgrades = InitiateUpgrades();
+
+    }
+    
     public async Task LoadGameState()
     {
         TotalScore = await _storageService.GetItemAsync<long>("TotalScore");

@@ -6,39 +6,54 @@
 <PageTitle>Счетчик 3 сентября</PageTitle>
 <div class="container h-75">
     <div class="row h-100">
-        <div class="col border border-4 border-dark statistics-wrap">
-            <img
-                class="statistics-bg"
-                src="images/shufutinskiy.png"/>
-            Статистика на фоне шуфутинского
-        </div>
-        <div class="col border border-4 border-dark d-flex justify-content-center flex-column">
-            
-            <h1>Счетчик 3 сентября</h1>
-            
-            <p role="status">Текущее 3 сентября номер: @_gameState.CurrentScore</p>
-            <button @onclick="_gameState.ClearAll">Сбросить прогресс</button>
-            <img src="images/newCalendar.png" alt="" @onclick="IncrementCount"/>
+        <div class="col-4 border border-4 border-dark statistics-wrap">
+            <div class="statistics-bg">
+                <img src="images/shufutinskiy.png"/>
+            </div>
 
-            
+            <div class="statistics-content">
+                <div class="fs-1 fw-bold outlined-text">Статистика</div>
+                <div class="fs-2 fw-bold outlined-text">Всего листов сорвано: @_gameState.TotalScore</div>
+                <div class="fs-2 fw-bold outlined-text">Всего апгрейдов куплено: @TotalUpgrades()</div>
+                <div class="fs-2 fw-bold outlined-text">Эссенция шуфутинского: 0</div>
+                <Button Color="ButtonColor.Primary" @onclick="() => _gameState.InitiateGameState()">Сбросить всё</Button>
+            </div>
+
         </div>
-        <div class="col border border-4 border-dark">
-            <h1>Апгрейды</h1>
-            <h2>Можно купить:</h2>
-            <button @onclick="BuyGuitar">Гитара @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
+        <div class="col-4 border border-4 border-dark d-flex justify-content-center flex-column">
             
-            <h2>Куплено:</h2>
+            <div class="fs-1 fw-bold outlined-text text-center">3 сентября номер</div>
+            <div class="fs-1 fw-bold outlined-text text-center">@_gameState.CurrentScore</div>
+            <button @onclick="_gameState.ClearAll">Сбросить прогресс</button>
+            <img src="images/newCalendar.png" alt="" @onclick="IncrementScore"/>
+
+        </div>
+        <div class="col-4 border border-4 border-dark upgrades-wrap">
+            <div class="upgrades-bg">
+                <img src="images/shufutinskiy.png"/>
+            </div>
             
-            @foreach (var item in ShowReachedUpgrades())
-            {
-                @item.Name
-            }
+            <div class="upgrades-content">
+                <div class="fs-1 fw-bold outlined-text">Апгрейды</div>
+                <div class="fs-2 fw-bold outlined-text">Можно купить:</div>
+                <Tooltip Class="d-inline-block" Title="Какое-то описание" role="button">
+                    <button @onclick="BuyGuitar">Гитара @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
+                </Tooltip>
+
+                <div class="fs-3 fw-bold outlined-text">Куплено:</div>
+
+                @foreach (var item in ShowReachedUpgrades())
+                {
+                    @item.Name
+                }
+            </div>
         </div>
     </div>
 </div>
 
 
 @code {
+
     private void IncrementScore()
     {
         _gameState.IncrementScore(1);
@@ -55,10 +70,10 @@
         await _gameState.LoadGameState();
         var timer = new Timer(1000);
         timer.Elapsed += async (source, e) => await Update(source, e);
-        
+
         timer.Enabled = true;
     }
-    
+
     private async Task Update(Object source, ElapsedEventArgs e)
     {
         foreach (var upgrade in _gameState.Upgrades)
@@ -69,10 +84,10 @@
         await _gameState.SaveGameState();
         StateHasChanged();
     }
-    
+
     private void BuyGuitar()
     {
-        var guitar =  _gameState.Upgrades.First(x => x.Name == "Guitar");
+        var guitar = _gameState.Upgrades.First(x => x.Name == "Guitar");
         _gameState.CurrentScore = guitar!.Buy(_gameState.CurrentScore);
     }
 
@@ -87,4 +102,10 @@
 
         return reachedUpgrades;
     }
+
+    protected int TotalUpgrades()
+    {
+        return _gameState.Upgrades.Select(x => x.CurrentLevel).Sum();
+    }
+
 }
