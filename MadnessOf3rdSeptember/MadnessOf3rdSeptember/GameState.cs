@@ -24,7 +24,16 @@ public class GameState
         return new()
         {
             new Guitar(),
-            new FanFestival()
+            new FanFestival(),
+            new ConcertHall(),
+            new Graffity(),
+            new RecordStudio(),
+            new Restaurant(),
+            new ShufuTower(),
+            new Space(),
+            new Store(),
+            new TimeTravel(),
+            new VillageHouse()
         };
     }
 
@@ -52,9 +61,12 @@ public class GameState
             return;
         foreach (var upgrade in Upgrades)
         {
-            var savedUpgrade = upgrades.First(x => x.Name == upgrade.Name);
-            upgrade.CurrentCost = savedUpgrade.CurrentCost;
-            upgrade.CurrentLevel = savedUpgrade.CurrentLevel;
+            var savedUpgrade = upgrades.FirstOrDefault(x => x.Name == upgrade.Name);
+            if (savedUpgrade != null)
+            {
+                upgrade.CurrentCost = savedUpgrade.CurrentCost;
+                upgrade.CurrentLevel = savedUpgrade.CurrentLevel;
+            }
         }
     }
 

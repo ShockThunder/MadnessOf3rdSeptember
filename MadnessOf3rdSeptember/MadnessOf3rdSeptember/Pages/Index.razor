@@ -12,35 +12,61 @@
             </div>
 
             <div class="statistics-content">
-                <div class="fs-1 fw-bold outlined-text">Статистика</div>
-                <div class="fs-2 fw-bold outlined-text">Всего листов сорвано: @_gameState.TotalScore</div>
-                <div class="fs-2 fw-bold outlined-text">Всего апгрейдов куплено: @TotalUpgrades()</div>
-                <div class="fs-2 fw-bold outlined-text">Эссенция шуфутинского: 0</div>
-                <Button Color="ButtonColor.Primary" @onclick="() => _gameState.InitiateGameState()">Сбросить всё</Button>
+                <div>
+                    <div class="fs-1 fw-bold outlined-text">Статистика</div>
+                    <div class="fs-2 fw-bold outlined-text">Всего листов сорвано: @_gameState.TotalScore</div>
+                    <div class="fs-2 fw-bold outlined-text">Всего апгрейдов куплено: @TotalUpgrades()</div>
+                    <div class="fs-2 fw-bold outlined-text">Эссенция шуфутинского: 0</div>
+                    <Button Color="ButtonColor.Primary" @onclick="() => _gameState.InitiateGameState()">Сбросить всё</Button>
+                </div>
+
+                <div>
+                    <iframe width="90%"
+                            src="https://www.youtube.com/embed/C-5t1DLMYV8?autoplay=1" allow="autoplay">
+                    </iframe>
+                </div>
+
             </div>
 
         </div>
         <div class="col-4 border border-4 border-dark d-flex justify-content-center flex-column">
-            
+
             <div class="fs-1 fw-bold outlined-text text-center">3 сентября номер</div>
             <div class="fs-1 fw-bold outlined-text text-center">@_gameState.CurrentScore</div>
             <button @onclick="_gameState.ClearAll">Сбросить прогресс</button>
-            <img src="images/newCalendar.png" alt="" @onclick="IncrementScore"/>
 
-        </div>     
+            <div class="calendar-wrap">
+                <img src="images/newCalendar.png" alt="" @onclick="HandleClick" class="calendar-image"/>
+            </div>
+
+        </div>
         <div class="col-4 border border-4 border-dark upgrades-wrap">
             <div class="upgrades-bg">
                 <img src="images/shufutinskiy.png"/>
             </div>
-            
+
             <div class="upgrades-content">
                 <div class="fs-1 fw-bold outlined-text">Апгрейды</div>
                 <div class="fs-2 fw-bold outlined-text">Можно купить:</div>
+                <div class="upgrades-list">
+                    @foreach (var upgrade in _gameState.Upgrades)
+                                    {
+                                        <div class="upgrade-element">
+                                            <div class="upgrade-icon">
+                                                <img src="icons/@(upgrade.Name).svg"/>
+                                            </div>
+                                            <div class="upgrade-info">
+                                                <div>Цена: @upgrade.CurrentCost</div>
+                                                <div>Куплено: @upgrade.CurrentLevel</div>
+                                            </div>
+                                        </div>
+                                    }
+                </div>
                 <Tooltip Class="d-inline-block" Title="Какое-то описание" role="button">
                     <button @onclick="BuyGuitar">Гитара. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
                 </Tooltip>
                 <br/>
-            <button @onclick="BuyFanFestival">Фестиваль фанатов. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "FanFestival").CurrentCost</button>
+                <button @onclick="BuyFanFestival">Фестиваль фанатов. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "FanFestival").CurrentCost</button>
 
                 <div class="fs-3 fw-bold outlined-text">Куплено:</div>
 
@@ -57,7 +83,7 @@
 
 @code {
 
-    private void IncrementScore()
+    private void HandleClick()
     {
         _gameState.IncrementScore(1);
     }
@@ -66,7 +92,6 @@
     {
         await StartGame();
     }
-
 
     private async Task StartGame()
     {

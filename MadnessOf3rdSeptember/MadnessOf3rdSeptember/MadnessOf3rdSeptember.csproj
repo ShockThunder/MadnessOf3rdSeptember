@@ -14,6 +14,14 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="wwwroot\icons\" />
       <Folder Include="wwwroot\images\" />
+      <Folder Include="wwwroot\js\" />
+      <Folder Include="wwwroot\sounds\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css" />
+      <_ContentIncludedByDefault Remove="wwwroot\css\bootstrap\bootstrap.min.css.map" />
     </ItemGroup>
 </Project>
