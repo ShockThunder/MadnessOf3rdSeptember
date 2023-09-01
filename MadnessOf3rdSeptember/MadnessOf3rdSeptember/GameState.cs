@@ -23,7 +23,8 @@ public class GameState
     {
         return new()
         {
-            new Guitar()
+            new Guitar(),
+            new FanFestival()
         };
     }
 
