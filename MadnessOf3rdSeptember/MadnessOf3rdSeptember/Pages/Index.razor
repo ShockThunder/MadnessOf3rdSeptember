@@ -21,13 +21,16 @@
         <div class="col border border-primary">
             <h1>Апгрейды</h1>
             <h2>Можно купить:</h2>
-            <button @onclick="BuyGuitar">Гитара @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
+            <button @onclick="BuyGuitar">Гитара. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
+            <br/>
+            <button @onclick="BuyFanFestival">Фестиваль фанатов. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "FanFestival").CurrentCost</button>
             
             <h2>Куплено:</h2>
             
             @foreach (var item in ShowReachedUpgrades())
             {
                 @item.Name
+                <br/>
             }
         </div>
     </div>
@@ -69,6 +72,12 @@
     {
         var guitar =  _gameState.Upgrades.First(x => x.Name == "Guitar");
         _gameState.CurrentScore = guitar!.Buy(_gameState.CurrentScore);
+    }
+
+    private void BuyFanFestival()
+    {
+        var festival = _gameState.Upgrades.First(x => x.Name == "FanFestival");
+        _gameState.CurrentScore = festival!.Buy(_gameState.CurrentScore);
     }
 
     private IList<IUpgrade> ShowReachedUpgrades()
