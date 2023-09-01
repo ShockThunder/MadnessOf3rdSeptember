@@ -19,7 +19,8 @@ public class GameState
 
     public List<IUpgrade> Upgrades { get; set; } = new()
     {
-        new Guitar()
+        new Guitar(),
+        new FanFestival()
     };
 
     public void IncrementScore(long value)
