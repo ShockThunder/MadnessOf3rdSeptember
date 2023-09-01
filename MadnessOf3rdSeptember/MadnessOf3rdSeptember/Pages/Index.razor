@@ -27,23 +27,7 @@
             <button @onclick="_gameState.ClearAll">Сбросить прогресс</button>
             <img src="images/newCalendar.png" alt="" @onclick="IncrementScore"/>
 
-        </div>
-<<<<<<< HEAD
-        <div class="col border border-primary">
-            <h1>Апгрейды</h1>
-            <h2>Можно купить:</h2>
-            <button @onclick="BuyGuitar">Гитара. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
-            <br/>
-            <button @onclick="BuyFanFestival">Фестиваль фанатов. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "FanFestival").CurrentCost</button>
-            
-            <h2>Куплено:</h2>
-            
-            @foreach (var item in ShowReachedUpgrades())
-            {
-                @item.Name
-                <br/>
-            }
-=======
+        </div>     
         <div class="col-4 border border-4 border-dark upgrades-wrap">
             <div class="upgrades-bg">
                 <img src="images/shufutinskiy.png"/>
@@ -53,17 +37,19 @@
                 <div class="fs-1 fw-bold outlined-text">Апгрейды</div>
                 <div class="fs-2 fw-bold outlined-text">Можно купить:</div>
                 <Tooltip Class="d-inline-block" Title="Какое-то описание" role="button">
-                    <button @onclick="BuyGuitar">Гитара @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
+                    <button @onclick="BuyGuitar">Гитара. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
                 </Tooltip>
+                <br/>
+            <button @onclick="BuyFanFestival">Фестиваль фанатов. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "FanFestival").CurrentCost</button>
 
                 <div class="fs-3 fw-bold outlined-text">Куплено:</div>
 
                 @foreach (var item in ShowReachedUpgrades())
                 {
                     @item.Name
+                    <br/>
                 }
             </div>
->>>>>>> origin/main
         </div>
     </div>
 </div>
