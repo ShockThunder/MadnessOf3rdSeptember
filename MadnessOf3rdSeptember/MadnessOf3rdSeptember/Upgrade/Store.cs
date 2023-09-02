@@ -18,6 +18,8 @@ public class Store : IUpgrade
         StartCost = 10;
         CurrentCost = StartCost;
         CountByLevel = 2;
+        Description =
+            "Магазин 'Время в руках': Позволяет игроку покупать артефакты и волшебные предметы для мгновенного переворота даты.";
     }
 
     public void Buy()

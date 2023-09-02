@@ -18,6 +18,8 @@ public class Guitar : IUpgrade
         StartCost = 10;
         CurrentCost = StartCost;
         CountByLevel = 2;
+        Description =
+            "Увеличенная гитара Шуфутинского - увеличивает размер гитары Шуфутинского в два раза, делая каждый аккорд более мелодичным и эффективным для переворотов календаря. Ваши клики звучат громче и ярче!";
     }
 
     public void Buy()

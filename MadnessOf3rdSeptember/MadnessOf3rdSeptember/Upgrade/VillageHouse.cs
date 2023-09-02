@@ -18,6 +18,8 @@ public class VillageHouse : IUpgrade
         StartCost = 10;
         CurrentCost = StartCost;
         CountByLevel = 2;
+        Description =
+            "Домик в деревне: Отправляйся в деревню Шуфутинского, чтобы получить мудрые советы и бонусы к переворотам.";
     }
 
     public void Buy()

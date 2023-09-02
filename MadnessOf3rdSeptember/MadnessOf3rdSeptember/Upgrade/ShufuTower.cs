@@ -18,6 +18,8 @@ public class ShufuTower : IUpgrade
         StartCost = 10;
         CurrentCost = StartCost;
         CountByLevel = 2;
+        Description =
+            "Шуфутинский-башня: Увеличивает скорость кликов благодаря вдохновению от Шуфутинского, который всегда знает, как перевернуть день.";
     }
 
     public void Buy()

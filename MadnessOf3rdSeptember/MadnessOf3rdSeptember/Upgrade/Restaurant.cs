@@ -18,6 +18,7 @@ public class Restaurant : IUpgrade
         StartCost = 10;
         CurrentCost = StartCost;
         CountByLevel = 2;
+        Description = "Ресторан 'Мелодия вкуса': Готовьте блюда по рецептам Шуфутинского, чтобы накапливать энергию для более быстрых кликов.";
     }
 
     public void Buy()
