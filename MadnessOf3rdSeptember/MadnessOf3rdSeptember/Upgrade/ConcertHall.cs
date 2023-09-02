@@ -17,7 +17,7 @@ public class ConcertHall : IUpgrade
         MaxLevel = 10;
         StartCost = 10;
         CurrentCost = StartCost;
-        CountByLevel = 2;
+        CountByLevel = 120;
         Description =
             "Концертный зал 'Календарь': Организовывай концерты Шуфутинского, чтобы собрать аплодисменты, которые ускоряют перевороты календаря.";
     }
@@ -25,6 +25,13 @@ public class ConcertHall : IUpgrade
     public void Buy()
     {
         CurrentLevel++;
-        CurrentCost = (CurrentCost + StartCost) * 200 / 150;
+        if (CurrentLevel == 9)
+        {
+            CurrentCost = (CurrentCost + StartCost) * (200 / 150) * StartCost * 5;
+            CountByLevel += 5000;
+        }
+
+        CountByLevel += CountByLevel * StartCost / CurrentLevel / 10;
+        CurrentCost = (CurrentCost + StartCost) * (200 / 150) * StartCost;
     }
 }
