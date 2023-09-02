@@ -8,6 +8,6 @@ public interface IUpgrade
     public int StartCost { get; }
     public int CurrentCost { get; set; }
     public int CountByLevel { get; set; }
-    public long Buy(long currentCount);
+    public void Buy();
 }
 

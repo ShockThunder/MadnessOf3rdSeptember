@@ -50,23 +50,23 @@
                 <div class="fs-2 fw-bold outlined-text">Можно купить:</div>
                 <div class="upgrades-list">
                     @foreach (var upgrade in _gameState.Upgrades)
-                                    {
-                                        <div class="upgrade-element">
-                                            <div class="upgrade-icon">
-                                                <img src="icons/@(upgrade.Name).svg"/>
-                                            </div>
-                                            <div class="upgrade-info">
-                                                <div>Цена: @upgrade.CurrentCost</div>
-                                                <div>Куплено: @upgrade.CurrentLevel</div>
-                                            </div>
-                                        </div>
-                                    }
+                    {
+                        <div class="upgrade-element">
+                            <div class="d-flex">
+                                <div class="upgrade-icon">
+                                    <img src="icons/@(upgrade.Name).svg"/>
+                                </div>
+                                <div class="upgrade-info">
+                                    <div>Цена: @upgrade.CurrentCost</div>
+                                    <div>Уровень: @upgrade.CurrentLevel</div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="big-btn btn btn-dark" disabled="@(!CanBuyUpgrade(upgrade))" @onclick="() => BuyUpgrade(upgrade)">Улучшить</button>
+                            </div>
+                        </div>
+                    }
                 </div>
-                <Tooltip Class="d-inline-block" Title="Какое-то описание" role="button">
-                    <button @onclick="BuyGuitar">Гитара. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "Guitar").CurrentCost</button>
-                </Tooltip>
-                <br/>
-                <button @onclick="BuyFanFestival">Фестиваль фанатов. Цена улучшения: @_gameState.Upgrades.First(x => x.Name == "FanFestival").CurrentCost</button>
 
                 <div class="fs-3 fw-bold outlined-text">Куплено:</div>
 
@@ -113,17 +113,17 @@
         StateHasChanged();
     }
 
-    private void BuyGuitar()
-    {
-        var guitar = _gameState.Upgrades.First(x => x.Name == "Guitar");
-        _gameState.CurrentScore = guitar!.Buy(_gameState.CurrentScore);
-    }
-
-    private void BuyFanFestival()
-    {
-        var festival = _gameState.Upgrades.First(x => x.Name == "FanFestival");
-        _gameState.CurrentScore = festival!.Buy(_gameState.CurrentScore);
-    }
+    // private void BuyGuitar()
+    // {
+    //     var guitar = _gameState.Upgrades.First(x => x.Name == "Guitar");
+    //     _gameState.CurrentScore = guitar!.Buy(_gameState.CurrentScore);
+    // }
+    //
+    // private void BuyFanFestival()
+    // {
+    //     var festival = _gameState.Upgrades.First(x => x.Name == "FanFestival");
+    //     _gameState.CurrentScore = festival!.Buy(_gameState.CurrentScore);
+    // }
 
     private IList<IUpgrade> ShowReachedUpgrades()
     {
@@ -140,6 +140,20 @@
     protected int TotalUpgrades()
     {
         return _gameState.Upgrades.Select(x => x.CurrentLevel).Sum();
+    }
+
+    private bool CanBuyUpgrade(IUpgrade upgrade)
+    {
+        return _gameState.CurrentScore >= upgrade.CurrentCost;
+    }
+
+    private void BuyUpgrade(IUpgrade upgrade)
+    {
+        if (_gameState.CurrentScore >= upgrade.CurrentCost)
+        {
+            _gameState.CurrentScore -= upgrade.CurrentCost;
+            upgrade.Buy();
+        }
     }
 
 }

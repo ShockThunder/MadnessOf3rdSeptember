@@ -18,15 +18,9 @@ public class FanFestival : IUpgrade
         CurrentCost = StartCost;
         CountByLevel = 200;
     }
-    public long Buy(long currentCount)
+    public void Buy()
     {
-        if(currentCount < CurrentCost)
-            return currentCount;
-
-        CurrentLevel++;
-        currentCount -= CurrentCost;
-        CurrentCost = (CurrentCost + StartCost) * (200 / 150) * CurrentLevel;
-
-        return currentCount;
+       CurrentLevel++;
+       CurrentCost = (CurrentCost + StartCost) * (200 / 150) * CurrentLevel;
     }
 }
