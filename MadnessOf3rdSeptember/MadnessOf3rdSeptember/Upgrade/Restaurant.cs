@@ -15,7 +15,7 @@ public class Restaurant : IUpgrade
         Name = "Restaurant";
         CurrentLevel = 0;
         MaxLevel = 10;
-        StartCost = 10;
+        StartCost = 50;
         CurrentCost = StartCost;
         CountByLevel = 2;
         Description = "Ресторан 'Мелодия вкуса': Готовьте блюда по рецептам Шуфутинского, чтобы накапливать энергию для более быстрых кликов.";
@@ -24,6 +24,7 @@ public class Restaurant : IUpgrade
     public void Buy()
     {
         CurrentLevel++;
-        CurrentCost = (CurrentCost + StartCost) * 200 / 150;
+        CurrentCost *= 3;
+        CountByLevel *= CurrentLevel / 3 + 1;
     }
 }

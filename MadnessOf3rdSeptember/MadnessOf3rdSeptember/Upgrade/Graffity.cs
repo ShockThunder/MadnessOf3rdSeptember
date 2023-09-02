@@ -15,9 +15,9 @@ public class Graffity : IUpgrade
         Name = "Graffity";
         CurrentLevel = 0;
         MaxLevel = 10;
-        StartCost = 10;
+        StartCost = 50;
         CurrentCost = StartCost;
-        CountByLevel = 2;
+        CountByLevel = 25;
         Description =
             "Стрит-арт граффити: Рисуйте граффити с портретами Шуфутинского на стенах, чтобы привлечь больше фанатов и повысить эффективность кликов.";
     }
@@ -25,6 +25,7 @@ public class Graffity : IUpgrade
     public void Buy()
     {
         CurrentLevel++;
-        CurrentCost = (CurrentCost + StartCost) * 200 / 150;
+        CountByLevel += 5 + CurrentCost / 100;
+        CurrentCost = ((int)Math.Pow(StartCost, 3) / 30) * (CurrentLevel + 1);
     }
 }

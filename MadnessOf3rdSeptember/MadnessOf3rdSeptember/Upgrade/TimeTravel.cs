@@ -17,7 +17,7 @@ public class TimeTravel : IUpgrade
         MaxLevel = 10;
         StartCost = 10;
         CurrentCost = StartCost;
-        CountByLevel = 2;
+        CountByLevel = 3;
         Description =
             "Шуфутинский-ворота времени: Создайте порталы во времени с помощью магии Шуфутинского, чтобы получать бонусы к скорости переворота календаря.";
     }
@@ -25,6 +25,16 @@ public class TimeTravel : IUpgrade
     public void Buy()
     {
         CurrentLevel++;
-        CurrentCost = (CurrentCost + StartCost) * 200 / 150;
+        if (CurrentLevel > 6)
+        {
+            CurrentCost *= 30;
+            CountByLevel *= 3;
+        }
+        else
+        {
+            CurrentCost *= 3;
+            CountByLevel *= 3;
+        }
+        
     }
 }

@@ -14,10 +14,10 @@ public class Space : IUpgrade
     {
         Name = "Space";
         CurrentLevel = 0;
-        MaxLevel = 10;
-        StartCost = 10;
+        MaxLevel = 1;
+        StartCost = 100000000;
         CurrentCost = StartCost;
-        CountByLevel = 2;
+        CountByLevel = 133333;
         Description =
             "Космическая ракета 'В будущее с Шуфутинским': Отправьтесь в космическое путешествие с Шуфутинским, чтобы найти новые даты и события, которые можно перевернуть.";
     }
@@ -25,6 +25,5 @@ public class Space : IUpgrade
     public void Buy()
     {
         CurrentLevel++;
-        CurrentCost = (CurrentCost + StartCost) * 200 / 150;
     }
 }
