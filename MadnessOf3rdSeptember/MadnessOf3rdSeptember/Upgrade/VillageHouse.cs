@@ -15,7 +15,7 @@ public class VillageHouse : IUpgrade
         Name = "VillageHouse";
         CurrentLevel = 0;
         MaxLevel = 10;
-        StartCost = 10;
+        StartCost = 1000;
         CurrentCost = StartCost;
         CountByLevel = 2;
         Description =
@@ -25,6 +25,7 @@ public class VillageHouse : IUpgrade
     public void Buy()
     {
         CurrentLevel++;
-        CurrentCost = (CurrentCost + StartCost) * 200 / 150;
+        CurrentCost *= (int)(StartCost * 0.1);
+        CountByLevel = (int)(CurrentCost * 0.025);
     }
 }

@@ -15,7 +15,7 @@ public class Store : IUpgrade
         Name = "Store";
         CurrentLevel = 0;
         MaxLevel = 10;
-        StartCost = 10;
+        StartCost = 5000;
         CurrentCost = StartCost;
         CountByLevel = 2;
         Description =
@@ -25,6 +25,7 @@ public class Store : IUpgrade
     public void Buy()
     {
         CurrentLevel++;
-        CurrentCost = (CurrentCost + StartCost) * 200 / 150;
+        CurrentCost = StartCost * (int)(Math.Round(5.0 * CurrentLevel));
+        CountByLevel = (int)(CurrentCost * 0.01);
     }
 }
