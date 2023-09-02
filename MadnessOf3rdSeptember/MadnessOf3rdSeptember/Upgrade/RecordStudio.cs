@@ -3,6 +3,7 @@
 public class RecordStudio : IUpgrade
 {
     public string Name { get; }
+    public string Description { get; set; }
     public int CurrentLevel { get; set; }
     public int MaxLevel { get; }
     public int StartCost { get; }
@@ -17,17 +18,13 @@ public class RecordStudio : IUpgrade
         StartCost = 10;
         CurrentCost = StartCost;
         CountByLevel = 2;
+        Description =
+            "Шуфутинская студия записи: Записывай новые песни Шуфутинского, чтобы получать монеты и ускорять процесс переворота календаря.";
     }
 
-    public long Buy(long currentCount)
+    public void Buy()
     {
-        if (currentCount < CurrentCost)
-            return currentCount;
-
         CurrentLevel++;
-        currentCount -= CurrentCost;
         CurrentCost = (CurrentCost + StartCost) * 200 / 150;
-
-        return currentCount;
     }
 }

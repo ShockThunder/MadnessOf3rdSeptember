@@ -3,6 +3,7 @@
 public class Store : IUpgrade
 {
     public string Name { get; }
+    public string Description { get; set; }
     public int CurrentLevel { get; set; }
     public int MaxLevel { get; }
     public int StartCost { get; }
@@ -17,17 +18,13 @@ public class Store : IUpgrade
         StartCost = 10;
         CurrentCost = StartCost;
         CountByLevel = 2;
+        Description =
+            "Магазин 'Время в руках': Позволяет игроку покупать артефакты и волшебные предметы для мгновенного переворота даты.";
     }
 
-    public long Buy(long currentCount)
+    public void Buy()
     {
-        if (currentCount < CurrentCost)
-            return currentCount;
-
         CurrentLevel++;
-        currentCount -= CurrentCost;
         CurrentCost = (CurrentCost + StartCost) * 200 / 150;
-
-        return currentCount;
     }
 }

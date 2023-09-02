@@ -3,6 +3,7 @@
 public class FanFestival : IUpgrade
 {
     public string Name { get; }
+    public string Description { get; set; }
     public int CurrentLevel { get; set; }
     public int MaxLevel { get; }
     public int StartCost { get; }
@@ -17,16 +18,12 @@ public class FanFestival : IUpgrade
         StartCost = 500;
         CurrentCost = StartCost;
         CountByLevel = 200;
+        Description =
+            "Фестиваль 'Шуфутинского поклонники': Устраивай фестиваль, чтобы собрать толпу поклонников, которые помогут переворачивать календарь вместе с вами.";
     }
-    public long Buy(long currentCount)
+    public void Buy()
     {
-        if(currentCount < CurrentCost)
-            return currentCount;
-
-        CurrentLevel++;
-        currentCount -= CurrentCost;
-        CurrentCost = (CurrentCost + StartCost) * (200 / 150) * CurrentLevel;
-
-        return currentCount;
+       CurrentLevel++;
+       CurrentCost = (CurrentCost + StartCost) * (200 / 150) * CurrentLevel;
     }
 }
