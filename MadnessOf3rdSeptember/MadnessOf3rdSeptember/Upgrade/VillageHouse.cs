@@ -25,7 +25,7 @@ public class VillageHouse : IUpgrade
     public void Buy()
     {
         CurrentLevel++;
-        CurrentCost *= (int)(StartCost * 0.1);
-        CountByLevel = (int)(CurrentCost * 0.025);
+        CurrentCost *= (int)(StartCost * 0.01);
+        CountByLevel = (int)(CurrentCost * 0.07);
     }
 }
