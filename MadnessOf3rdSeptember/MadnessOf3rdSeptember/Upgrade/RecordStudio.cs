@@ -15,9 +15,9 @@ public class RecordStudio : IUpgrade
         Name = "RecordStudio";
         CurrentLevel = 0;
         MaxLevel = 10;
-        StartCost = 10;
+        StartCost = 100000;
         CurrentCost = StartCost;
-        CountByLevel = 2;
+        CountByLevel = 3333;
         Description =
             "Шуфутинская студия записи: Записывай новые песни Шуфутинского, чтобы получать монеты и ускорять процесс переворота календаря.";
     }
@@ -25,6 +25,16 @@ public class RecordStudio : IUpgrade
     public void Buy()
     {
         CurrentLevel++;
-        CurrentCost = (CurrentCost + StartCost) * 200 / 150;
+        if (CurrentCost < 100000000)
+        {
+            CurrentCost *= 10;
+            CountByLevel += 3333;
+        }
+        else
+        {
+            CurrentCost += CurrentCost * 2 / 10;
+            CountByLevel += 3333 / 3 * (3 + 3) - ((int)Math.Pow(33, 3) / 3);
+        }
+        
     }
 }
