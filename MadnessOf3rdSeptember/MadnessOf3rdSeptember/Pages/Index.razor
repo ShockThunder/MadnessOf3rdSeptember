@@ -4,13 +4,12 @@
 @inject GameState _gameState;
 
 <PageTitle>Счетчик 3 сентября</PageTitle>
-<div class="container h-75">
-    <div class="row h-100">
+<div class="container">
+    <div class="row mt-5">
         <div class="col-4 border border-4 border-dark statistics-wrap">
-            <div class="statistics-bg">
-                <img src="images/shufutinskiy.png"/>
-            </div>
 
+            <img class="statistics-bg" src="images/shufutinskiy.png"/>
+            
             <div class="statistics-content">
                 <div>
                     <div class="fs-1 fw-bold outlined-text">Статистика</div>
@@ -41,21 +40,21 @@
 
         </div>
         <div class="col-4 border border-4 border-dark upgrades-wrap">
-            <div class="upgrades-bg">
-                <img src="images/shufutinskiy.png"/>
-            </div>
 
+            <img src="images/shufutinskiy.png" class="upgrades-bg"/>
+            
             <div class="upgrades-content">
-                <div class="fs-1 fw-bold outlined-text">Апгрейды</div>
-                <div class="fs-2 fw-bold outlined-text">Можно купить:</div>
+                <div class="fs-1 fw-bold outlined-text">Потрать листы</div>
                 <div class="upgrades-list">
                     @foreach (var upgrade in _gameState.Upgrades)
                     {
                         <div class="upgrade-element">
                             <div class="d-flex">
-                                <div class="upgrade-icon">
-                                    <img src="icons/@(upgrade.Name).svg"/>
-                                </div>
+                                <Tooltip Title="@upgrade.Description" Style="margin-bottom: auto; margin-top: auto;">
+                                    <div class="upgrade-icon">
+                                        <img src="icons/@(upgrade.Name).svg"/>
+                                    </div>
+                                </Tooltip>
                                 <div class="upgrade-info">
                                     <div>Цена: @upgrade.CurrentCost</div>
                                     <div>Уровень: @upgrade.CurrentLevel</div>
@@ -67,15 +66,16 @@
                         </div>
                     }
                 </div>
-
-                <div class="fs-3 fw-bold outlined-text">Куплено:</div>
-
-                @foreach (var item in ShowReachedUpgrades())
-                {
-                    @item.Name
-                    <br/>
-                }
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center pt-4">
+            Сделано по приколу ими: <a href="https://github.com/ShockThunder">ShockThunder</a> и <a href="https://github.com/HokkuSengoku">HokkuSengoku</a>.
+            Звездочку в репозиторий можно поставить <a href="https://github.com/ShockThunder/MadnessOf3rdSeptember">Здесь</a>.
+            <p>
+                Работает на Blazor WASM, хостится на GithubPages
+            </p>
         </div>
     </div>
 </div>

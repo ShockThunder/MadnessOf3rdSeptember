@@ -1,17 +1,1 @@
-.page {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    background-image: url("images/background.png");
-    background-repeat: round;
-    height: 100vh;
-    width: 100vw;
-}
 
-main {
-    flex: 1;
-}
-
-article {
-    height: 100%;
-}
