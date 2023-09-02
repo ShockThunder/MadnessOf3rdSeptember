@@ -15,9 +15,9 @@ public class ShufuTower : IUpgrade
         Name = "ShufuTower";
         CurrentLevel = 0;
         MaxLevel = 10;
-        StartCost = 10;
+        StartCost = 100;
         CurrentCost = StartCost;
-        CountByLevel = 2;
+        CountByLevel = 100;
         Description =
             "Шуфутинский-башня: Увеличивает скорость кликов благодаря вдохновению от Шуфутинского, который всегда знает, как перевернуть день.";
     }
@@ -25,6 +25,7 @@ public class ShufuTower : IUpgrade
     public void Buy()
     {
         CurrentLevel++;
-        CurrentCost = (CurrentCost + StartCost) * 200 / 150;
+        CurrentCost *= 10;
+        CountByLevel *= (CurrentLevel + 1) / 2;
     }
 }
