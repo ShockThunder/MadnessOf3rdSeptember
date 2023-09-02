@@ -13,7 +13,7 @@
             <div class="statistics-content">
                 <div>
                     <div class="fs-1 fw-bold outlined-text">Статистика</div>
-                    <div class="fs-2 fw-bold outlined-text">Всего листов сорвано: @_gameState.TotalScore</div>
+                    <div class="fs-2 fw-bold outlined-text">Всего листов сорвано: @(_gameState.TotalScore/1000)K</div>
                     <div class="fs-2 fw-bold outlined-text">Всего апгрейдов куплено: @TotalUpgrades()</div>
                     <div class="fs-2 fw-bold outlined-text">Эссенция шуфутинского: 0</div>
                     <Button Color="ButtonColor.Primary" @onclick="() => _gameState.InitiateGameState()">Сбросить всё</Button>
@@ -30,9 +30,8 @@
         </div>
         <div class="col-4 border border-4 border-dark d-flex justify-content-center flex-column">
 
-            <div class="fs-1 fw-bold outlined-text text-center">3 сентября номер</div>
+            <div class="fs-1 fw-bold outlined-text text-center">3 сентября номер:</div>
             <div class="fs-1 fw-bold outlined-text text-center">@_gameState.CurrentScore</div>
-            <button @onclick="_gameState.ClearAll">Сбросить прогресс</button>
 
             <div class="calendar-wrap">
                 <img src="images/newCalendar.png" alt="" @onclick="HandleClick" class="calendar-image"/>
@@ -144,7 +143,7 @@
 
     private bool CanBuyUpgrade(IUpgrade upgrade)
     {
-        return _gameState.CurrentScore >= upgrade.CurrentCost;
+        return _gameState.CurrentScore >= upgrade.CurrentCost && upgrade.CurrentLevel < upgrade.MaxLevel;
     }
 
     private void BuyUpgrade(IUpgrade upgrade)
