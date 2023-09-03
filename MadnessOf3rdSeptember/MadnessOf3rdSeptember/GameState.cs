@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using System.Text.Json.Serialization;
+﻿
 using Blazored.LocalStorage;
 using MadnessOf3rdSeptember.Upgrade;
 
@@ -14,14 +13,14 @@ public class GameState
         _storageService = storageService;
     }
 
-    public long TotalScore { get; set; } = 0;
-    public long CurrentScore { get; set; } = 0;
+    public double TotalScore { get; set; } = 0;
+    public double CurrentScore { get; set; } = 0;
 
-    public List<IUpgrade> Upgrades { get; set; } = InitiateUpgrades();
+    public List<Upgrade.Upgrade> Upgrades { get; set; } = InitiateUpgrades();
 
-    private static List<IUpgrade> InitiateUpgrades()
+    private static List<Upgrade.Upgrade> InitiateUpgrades()
     {
-        return new()
+        var upgrades = new List<Upgrade.Upgrade>()
         {
             new Guitar(),
             new FanFestival(),
@@ -35,12 +34,14 @@ public class GameState
             new TimeTravel(),
             new VillageHouse()
         };
+
+        return upgrades.OrderBy(x => x.StartCost).ToList();
     }
 
-    public void IncrementScore(long value)
+    public void IncrementScore(double value)
     {
-        CurrentScore += value;
-        TotalScore += value;
+        CurrentScore = Math.Round(CurrentScore + value, 2);
+        TotalScore = Math.Round(TotalScore + value, 2);
     }
 
     public void InitiateGameState()
@@ -53,8 +54,8 @@ public class GameState
     
     public async Task LoadGameState()
     {
-        TotalScore = await _storageService.GetItemAsync<long>("TotalScore");
-        CurrentScore = await _storageService.GetItemAsync<long>("CurrentScore");
+        TotalScore = await _storageService.GetItemAsync<double>("TotalScore");
+        CurrentScore = await _storageService.GetItemAsync<double>("CurrentScore");
 
         var upgrades = await _storageService.GetItemAsync<List<SavedUpgrade>>("Upgrades");
         if(upgrades == null)
@@ -89,16 +90,10 @@ public class GameState
         await _storageService.SetItemAsync("Upgrades", list);
     }
 
-    public async void ClearAll()
-    {
-        await _storageService.ClearAsync();
-        await LoadGameState();
-    }
-
     private class SavedUpgrade
     {
         public string Name { get; set; }
-        public int CurrentCost { get; set; }
-        public int CurrentLevel { get; set; }
+        public double CurrentCost { get; set; }
+        public long CurrentLevel { get; set; }
     }
 }
