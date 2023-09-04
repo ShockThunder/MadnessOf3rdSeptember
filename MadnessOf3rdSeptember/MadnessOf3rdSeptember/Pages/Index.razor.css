@@ -1,0 +1,101 @@
+﻿.statistics-bg {
+    opacity: 0.5;
+    left: 0;
+    top: 0;
+    position: absolute;
+    z-index: 0;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.statistics-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.statistics-content {
+    position: absolute;
+    z-index: 1;
+    width: 95%;
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.upgrades-bg {
+    opacity: 0.5;
+    left: 0;
+    top: 0;
+    position: absolute;
+    z-index: 0;
+    object-fit: contain;
+    width: 100%;
+    height: 100%;
+}
+
+.upgrades-wrap {
+    overflow: hidden;
+    position: relative;
+}
+
+.upgrades-content {
+    position: absolute;
+    z-index: 1;
+    width: 95%;
+    max-height: 100%;
+}
+
+.outlined-text {
+    color: #f9d76f;
+    -webkit-text-stroke-width: 1.3px;
+    -webkit-text-stroke-color: #000000;
+}
+
+.calendar-wrap {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-image {
+    width: 100%;
+}
+
+.calendar-image:active {
+    width: 90%;
+}
+
+.upgrade-element {
+    display: flex;
+    margin-bottom: 10px;
+    background-color: #fbf5e3;
+    justify-content: space-between;
+}
+
+.upgrade-icon {
+    min-width: 50px;
+    min-height: 50px;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color: black;
+}
+
+.upgrades-list {
+    max-height: 500px;
+    overflow-y: scroll;
+}
+
+.upgrade-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.big-btn {
+    height: 100%;
+}

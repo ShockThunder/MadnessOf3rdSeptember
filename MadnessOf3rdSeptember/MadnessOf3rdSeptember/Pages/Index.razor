@@ -1,0 +1,158 @@
+﻿@page "/"
+@using System.Timers
+@using MadnessOf3rdSeptember.Upgrade
+@inject GameState _gameState;
+
+<PageTitle>Счетчик 3 сентября</PageTitle>
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-4 border border-4 border-dark statistics-wrap">
+
+            <img class="statistics-bg" src="images/shufutinskiy.png"/>
+            
+            <div class="statistics-content">
+                <div>
+                    <div class="fs-1 fw-bold outlined-text">Статистика</div>
+                    <div class="fs-2 fw-bold outlined-text">Всего листов сорвано: @(_gameState.TotalScore/1000)K</div>
+                    <div class="fs-2 fw-bold outlined-text">Всего апгрейдов куплено: @TotalUpgrades()</div>
+                    <div class="fs-2 fw-bold outlined-text">Эссенция шуфутинского: 0</div>
+                    <Button Color="ButtonColor.Primary" @onclick="() => _gameState.InitiateGameState()">Сбросить всё</Button>
+                </div>
+
+                <div>
+                    <iframe width="90%"
+                            src="https://www.youtube.com/embed/C-5t1DLMYV8?autoplay=1" allow="autoplay">
+                    </iframe>
+                </div>
+
+            </div>
+
+        </div>
+        <div class="col-4 border border-4 border-dark d-flex justify-content-center flex-column">
+
+            <div class="fs-1 fw-bold outlined-text text-center">3 сентября номер:</div>
+            <div class="fs-1 fw-bold outlined-text text-center">@_gameState.CurrentScore</div>
+
+            <div class="calendar-wrap">
+                <img src="images/newCalendar.png" alt="" @onclick="HandleClick" class="calendar-image"/>
+            </div>
+
+        </div>
+        <div class="col-4 border border-4 border-dark upgrades-wrap">
+
+            <img src="images/shufutinskiy.png" class="upgrades-bg"/>
+            
+            <div class="upgrades-content">
+                <div class="fs-1 fw-bold outlined-text">Потрать листы</div>
+                <div class="upgrades-list">
+                    @foreach (var upgrade in _gameState.Upgrades)
+                    {
+                        <div class="upgrade-element">
+                            <div class="d-flex">
+                                <Tooltip Title="@upgrade.Description" Style="margin-bottom: auto; margin-top: auto;">
+                                    <div class="upgrade-icon">
+                                        <img src="icons/@(upgrade.Name).svg"/>
+                                    </div>
+                                </Tooltip>
+                                <div class="upgrade-info">
+                                    <div>Цена: @upgrade.CurrentCost</div>
+                                    <div>Уровень: @upgrade.CurrentLevel</div>
+                                </div>
+                            </div>
+                            <div>
+                                <button class="big-btn btn btn-dark" disabled="@(!CanBuyUpgrade(upgrade))" @onclick="() => BuyUpgrade(upgrade)">Улучшить</button>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-center pt-4">
+            Сделано по приколу ими: <a href="https://github.com/ShockThunder">ShockThunder</a> и <a href="https://github.com/HokkuSengoku">HokkuSengoku</a>.
+            Звездочку в репозиторий можно поставить <a href="https://github.com/ShockThunder/MadnessOf3rdSeptember">Здесь</a>.
+            <p>
+                Работает на Blazor WASM, хостится на GithubPages
+            </p>
+        </div>
+    </div>
+</div>
+
+
+@code {
+
+    private void HandleClick()
+    {
+        _gameState.IncrementScore(1);
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await StartGame();
+    }
+
+    private async Task StartGame()
+    {
+        await _gameState.LoadGameState();
+        var timer = new Timer(1000);
+        timer.Elapsed += async (source, e) => await Update(source, e);
+
+        timer.Enabled = true;
+    }
+
+    private async Task Update(Object source, ElapsedEventArgs e)
+    {
+        foreach (var upgrade in _gameState.Upgrades)
+        {
+            _gameState.IncrementScore(upgrade.CountByLevel * upgrade.CurrentLevel);
+        }
+
+        await _gameState.SaveGameState();
+        StateHasChanged();
+    }
+
+    // private void BuyGuitar()
+    // {
+    //     var guitar = _gameState.Upgrades.First(x => x.Name == "Guitar");
+    //     _gameState.CurrentScore = guitar!.Buy(_gameState.CurrentScore);
+    // }
+    //
+    // private void BuyFanFestival()
+    // {
+    //     var festival = _gameState.Upgrades.First(x => x.Name == "FanFestival");
+    //     _gameState.CurrentScore = festival!.Buy(_gameState.CurrentScore);
+    // }
+
+    private IList<IUpgrade> ShowReachedUpgrades()
+    {
+        IList<IUpgrade> reachedUpgrades = new List<IUpgrade>();
+        foreach (var upgrade in _gameState.Upgrades)
+        {
+            if (upgrade.CurrentLevel > 0)
+                reachedUpgrades.Add(upgrade);
+        }
+
+        return reachedUpgrades;
+    }
+
+    protected int TotalUpgrades()
+    {
+        return _gameState.Upgrades.Select(x => x.CurrentLevel).Sum();
+    }
+
+    private bool CanBuyUpgrade(IUpgrade upgrade)
+    {
+        return _gameState.CurrentScore >= upgrade.CurrentCost && upgrade.CurrentLevel < upgrade.MaxLevel;
+    }
+
+    private void BuyUpgrade(IUpgrade upgrade)
+    {
+        if (_gameState.CurrentScore >= upgrade.CurrentCost)
+        {
+            _gameState.CurrentScore -= upgrade.CurrentCost;
+            upgrade.Buy();
+        }
+    }
+
+}
