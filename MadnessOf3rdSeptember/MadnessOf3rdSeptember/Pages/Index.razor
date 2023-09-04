@@ -14,6 +14,7 @@
                 <div>
                     <div class="fs-1 fw-bold outlined-text">Статистика</div>
                     <div class="fs-2 fw-bold outlined-text">Листов сорвано: @(Math.Round(_gameState.TotalScore/1000, 2))K</div>
+                    <div class="fs-2 fw-bold outlined-text">Листов в секунду: @ListsPerSec(_gameState.Upgrades)</div>
                     <div class="fs-2 fw-bold outlined-text">Апгрейдов куплено: @TotalUpgrades()</div>
                     <Button Color="ButtonColor.Danger" @onclick="() => _gameState.InitiateGameState()">Сбросить всё</Button>
                 </div>
@@ -130,6 +131,17 @@
             _gameState.CurrentScore -= Math.Round(upgrade.CurrentCost, 2);
             upgrade.Buy();
         }
+    }
+
+    private double ListsPerSec(List<Upgrade> upgrades)
+    {
+        var perSec = 0.00;
+
+        foreach (var item in upgrades)
+        {
+            perSec += (Math.Round(item.CountByLevel * item.CurrentLevel, 2));
+        }
+        return perSec;
     }
 
 }
