@@ -52,7 +52,8 @@
 
 .outlined-text[b-x70cvu78cj] {
     color: #f9d76f;
-    -webkit-text-stroke-width: 1.3px;
+    paint-order: stroke fill;
+    -webkit-text-stroke-width: 4px;
     -webkit-text-stroke-color: #000000;
 }
 
