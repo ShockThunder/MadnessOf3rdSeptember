@@ -8,8 +8,9 @@ public class Graffity : Upgrade
         CurrentLevel = 0;
         StartCost = 12000;
         CurrentCost = StartCost;
-        CountByLevel = 47;
+        CountByLevel = 260;
         Description =
             "Стрит-арт граффити: Рисуйте граффити с портретами Шуфутинского на стенах, чтобы привлечь больше фанатов и повысить эффективность кликов.";
     }
+
 }
