@@ -8,8 +8,9 @@ public class VillageHouse : Upgrade
         CurrentLevel = 0;
         StartCost = 330000000;
         CurrentCost = StartCost;
-        CountByLevel = 44000;
+        CountByLevel = 260000;
         Description =
             "Домик в деревне: Отправляйся в деревню Шуфутинского, чтобы получить мудрые советы и бонусы к переворотам.";
     }
+
 }
