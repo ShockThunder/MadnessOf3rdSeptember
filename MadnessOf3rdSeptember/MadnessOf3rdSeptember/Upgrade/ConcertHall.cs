@@ -8,8 +8,9 @@ public class ConcertHall : Upgrade
         CurrentLevel = 0;
         StartCost = 100;
         CurrentCost = StartCost;
-        CountByLevel = 1;
+        CountByLevel = 8;
         Description =
             "Концертный зал 'Календарь': Организовывай концерты Шуфутинского, чтобы собрать аплодисменты, которые ускоряют перевороты календаря.";
     }
+
 }
