@@ -8,7 +8,7 @@ public class FanFestival : Upgrade
         CurrentLevel = 0;
         StartCost = 20000000;
         CurrentCost = StartCost;
-        CountByLevel = 7800;
+        CountByLevel = 44000;
         Description =
             "Фестиваль 'Шуфутинского поклонники': Устраивай фестиваль, чтобы собрать толпу поклонников, которые помогут переворачивать календарь вместе с вами.";
     }
