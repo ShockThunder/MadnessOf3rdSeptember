@@ -8,8 +8,9 @@ public class ShufuTower : Upgrade
         CurrentLevel = 0;
         StartCost = 1400000;
         CurrentCost = StartCost;
-        CountByLevel = 1400;
+        CountByLevel = 30000;
         Description =
             "Шуфутинский-башня: Увеличивает скорость кликов благодаря вдохновению от Шуфутинского, который всегда знает, как перевернуть день.";
     }
+
 }
