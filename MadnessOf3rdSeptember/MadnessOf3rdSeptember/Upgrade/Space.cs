@@ -8,8 +8,9 @@ public class Space : Upgrade
         CurrentLevel = 0;
         StartCost = 1000000000000;
         CurrentCost = StartCost;
-        CountByLevel = 10000000;
+        CountByLevel = 65000000;
         Description =
             "Космическая ракета 'В будущее с Шуфутинским': Отправьтесь в космическое путешествие с Шуфутинским, чтобы найти новые даты и события, которые можно перевернуть.";
     }
+
 }
